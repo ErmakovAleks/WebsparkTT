@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:webspark_tt/src/routes/router.dart';
+import 'package:webspark_tt/src/utils/shared_preferences_wrapper.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferencesWrapper.processInitialize();
+  
   runApp(const MainApp());
 }
 
@@ -9,12 +14,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      title: 'Webspark TT',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
       ),
+      initialRoute: AppRouteKeys.home,
+      onGenerateRoute: AppRouter,
     );
   }
 }
