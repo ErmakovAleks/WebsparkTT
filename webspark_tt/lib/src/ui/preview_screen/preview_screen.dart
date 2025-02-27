@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:webspark_tt/src/constants/colors.dart';
 import 'package:webspark_tt/src/models/models.dart';
 import 'package:webspark_tt/src/ui/preview_screen/preview_screen_view_model.dart';
 import 'package:webspark_tt/src/widgets/custom_app_bar.dart';

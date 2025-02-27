@@ -22,20 +22,20 @@ class ApiProvider {
   }
 
   Future<ResultsResponse> sendResults(List<ResultRequest> results) async {
-  final url = Uri.parse('https://flutter.webspark.dev/flutter/api');
-  final headers = {"Content-Type": "application/json"};
-  final body = jsonEncode(results.map((r) => r.toJson()).toList());
+    final url = Uri.parse('https://flutter.webspark.dev/flutter/api');
+    final headers = {"Content-Type": "application/json"};
+    final body = jsonEncode(results.map((r) => r.toJson()).toList());
 
-  try {
-    final response = await http.post(url, headers: headers, body: body);
+    try {
+      final response = await http.post(url, headers: headers, body: body);
 
-    if (response.statusCode == 200) {
-      return ResultsResponse.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Server error: ${response.statusCode}');
+      if (response.statusCode == 200) {
+        return ResultsResponse.fromJson(json.decode(response.body));
+      } else {
+        throw Exception('Server error: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Network error: $e');
     }
-  } catch (e) {
-    throw Exception('Network error: $e');
   }
-}
 }

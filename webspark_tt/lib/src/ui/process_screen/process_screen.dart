@@ -66,7 +66,7 @@ class _HomeScreenState extends State<ProcessScreen> {
               ),
               const SizedBox(height: 24),
               Text(
-                '${((snapshot.data ?? 0.0) * 100).ceil()}%', // Отображение процентов
+                '${((snapshot.data ?? 0.0) * 100).ceil()}%',
                 style:
                     const TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
               ),
