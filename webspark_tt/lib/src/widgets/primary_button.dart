@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String title;
-  final VoidCallback action;
+  final VoidCallback? action;
 
   const PrimaryButton({
     super.key,
@@ -19,6 +19,7 @@ class PrimaryButton extends StatelessWidget {
         onPressed: action,
         style: ElevatedButton.styleFrom(
             backgroundColor: Colors.lightBlue,
+            disabledBackgroundColor: Colors.blueGrey,
             side: const BorderSide(color: Colors.blueAccent, width: 2),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),

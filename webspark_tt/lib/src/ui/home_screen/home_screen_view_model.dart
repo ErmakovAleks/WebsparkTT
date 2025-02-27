@@ -6,11 +6,11 @@ import 'package:webspark_tt/src/utils/error_handable.dart';
 import 'package:webspark_tt/src/utils/shared_preferences_wrapper.dart';
 
 class HomeScreenViewModel with ErrorHandable {
-  final ApiProvider provider;
+  final ApiProvider _provider;
   final TextEditingController controller = TextEditingController();
   final isLoading = BehaviorSubject<bool>.seeded(false);
 
-  HomeScreenViewModel({required this.provider}) {
+  HomeScreenViewModel({required ApiProvider provider}) :_provider = provider {
     controller.text = SharedPreferencesWrapper.getURL() ?? '';
   }
 
@@ -32,8 +32,7 @@ class HomeScreenViewModel with ErrorHandable {
   }
 
   void _sendRequest(BuildContext context, String stringUrl) async {
-    provider.fetchTasks(stringUrl).then((value) {
-      debugPrint('<!> Response = ${value.data.length}');
+    _provider.fetchTasks(stringUrl).then((value) {
       if (context.mounted) Navigator.of(context).pushNamed(AppRouteKeys.process, arguments: value);
       isLoading.add(false);
     }).catchError((error) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webspark_tt/src/ui/home_screen/home_screen_view_model.dart';
+import 'package:webspark_tt/src/widgets/custom_app_bar.dart';
 import 'package:webspark_tt/src/widgets/primary_button.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,36 +19,24 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appbar(),
+      appBar: const CustomAppBar(title: 'Home screen', showBackButton: false),
       body: _body(),
-    );
-  }
-
-  PreferredSizeWidget _appbar() {
-    return AppBar(
-      title: const Text(
-        'Home screen',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      backgroundColor: Colors.blue,
-      centerTitle: false,
     );
   }
 
   Widget _body() {
     return StreamBuilder<bool>(
-        stream: widget.viewModel.isLoading,
-        builder: (context, snapshot) {
-          return Stack(
-            children: [
-              _content(),
-              if (snapshot.data ?? true) const Center(child: CircularProgressIndicator())
-            ],
-          );
-        });
+      stream: widget.viewModel.isLoading,
+      builder: (context, snapshot) {
+        return Stack(
+          children: [
+            _content(),
+            if (snapshot.data ?? true)
+              const Center(child: CircularProgressIndicator())
+          ],
+        );
+      },
+    );
   }
 
   Widget _content() {
