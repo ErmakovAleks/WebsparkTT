@@ -43,7 +43,7 @@ class PreviewScreen extends StatelessWidget {
                 return Container(
                   margin: const EdgeInsets.all(1),
                   decoration: BoxDecoration(
-                    color: _getCellColor(grid, point),
+                    color: viewModel.getCellColor(grid, point),
                     border: Border.all(color: Colors.black, width: 0.5),
                   ),
                   child: Center(
@@ -52,7 +52,7 @@ class PreviewScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: _getTextColor(grid, point),
+                        color: viewModel.getTextColor(grid, point),
                       ),
                     ),
                   ),
@@ -72,21 +72,5 @@ class PreviewScreen extends StatelessWidget {
           ),
         ],
     );
-  }
-
-  Color _getCellColor(List<List<String>> grid, Point point) {
-    if (point == viewModel.task.task.start) return AppColors.start;
-    if (point == viewModel.task.task.end) return AppColors.end;
-    if (viewModel.task.path.contains(point.toString())) return AppColors.shortest;
-    if (grid[point.x][point.y] == 'X') return AppColors.blocked;
-    return AppColors.empty;
-  }
-
-  Color _getTextColor(List<List<String>> grid, Point point) {
-    if (grid[point.x][point.y] == 'X' || viewModel.task.path.contains(point.toString())) {
-      return Colors.white;
-    }
-
-    return Colors.black;
   }
 }
